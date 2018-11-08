@@ -12,9 +12,9 @@ cd front-end && npm run build
 ```
 
 ```
-cd back-end && powder link
+cd ../back-end && powder link 
 ```
 
 ```
-cd back-end && powder open
+powder open
 ```
