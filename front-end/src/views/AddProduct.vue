@@ -27,18 +27,23 @@
 
 
 <script>
+
+import {WebAppAPI} from '@/API.js'
+
 export default {
   name: 'add-product',
   template: '#add-product',
-  data: function () {
+  data () {
     return {product: {name: '', description: '', price: ''}
     }
   },
   methods: {
-    createProduct: function() {
+    createProduct() {
       //Obsolete, product is available directly from data...
-      alert(this.product.name);
-      router.push('/');
+      console.log(this.product);
+      WebAppAPI.AddProduct(this.product).then((response)=>{
+        this.$router.push('/');
+      });
     }
   }
 };

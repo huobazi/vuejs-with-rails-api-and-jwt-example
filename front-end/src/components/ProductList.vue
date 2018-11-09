@@ -5,7 +5,7 @@
       <a class="btn btn-default">
         <router-link :to="{path: '/add-product'}">
           <span class="glyphicon glyphicon-plus"></span>
-          Add product
+          添加商品
         </router-link>
       </a>
     </div>
@@ -55,29 +55,30 @@
 </template>
 
 <script>
-import {getAllProducts} from '@/API.js'
+import {WebAppAPI} from '@/API.js'
 export default {
   name: 'ProductList',
   template: '#product-list',
-  data: function() {
+  data(){
     return {
       products: [],
       searchKey: '',
     };
   },
   methods: {
-    loadAllProducts: function() {
-      return getAllProducts().then(function(response){
-        this.products = response;
+    loadAllProducts(){
+      WebAppAPI.GetAllProducts().then((res) =>{
+        this.products = res;
       });
     },
   },
-  ready: function() {
+  ready(){
+
   },
-  created: function() {
+  created(){
     this.loadAllProducts();
   },
-  mounted: function() {
+  mounted(){
   },
   computed: {
     filteredProducts() {
