@@ -8,6 +8,25 @@
   </div>
 </template>
 
+<script>
+// export default {
+//   name: 'app',
+//       created: function() {
+//          console.log('app created')
+//       },
+//       mounted: function() {
+//          console.log('app mounted')
+//          console.log('this.$route', this.$route)
+//       },
+//       methods: {
+//         foo:function(){},
+//       },
+//       destroyed: function() {
+//         console.log('app destroyed');
+//       }
+//    }
+</script>
+
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
