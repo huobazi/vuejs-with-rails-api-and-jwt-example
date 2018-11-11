@@ -16,7 +16,7 @@ module.exports = {
    // baseUrl: process.env.NODE_ENV === 'production' ? '/your/dir/' : '/'
   
     // where to output built files
-    outputDir: '../back-end/public',
+    outputDir: './dist',
   
     // where to put static assets (js/css/img/font/...)
     assetsDir: 'assets',

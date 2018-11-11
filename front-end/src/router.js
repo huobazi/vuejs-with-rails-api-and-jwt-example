@@ -23,7 +23,7 @@ export default new Router({
       }
     },
     {
-      path: '/add-product',
+      path: '/add',
       name: 'add-product',
       component: AddProduct
     }

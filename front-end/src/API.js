@@ -1,45 +1,38 @@
-import {
-    stringify
-} from 'qs';
+import qs from 'qs';
 
 import axios from 'axios';
-axios.defaults.baseURL = 'http://back-end.test/api/v1';
+axios.defaults.baseURL = 'http://localhost:3000/api/v1';
 axios.defaults.timeout = 1000 * 60 * 3;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 axios.defaults.headers.get['Content-Type'] = 'application/json';
 
+let accessToken = sessionStorage.getItem('access-token');
+let axiosInstance = axios.create({
+  headers: {
+    'X-Authorization-AccessToken': accessToken
+  },
 
-export const getAllProducts = () => {
-    return axios.get("/products").then(function (response) {
-        return response.data;
-    });
-};
+  paramsSerializer: (params) => {
+    return qs.stringify(params, {arrayFormat: 'brackets'});
+  }
+});
 
 
 export const WebAppAPI = {
 
     GetAllProducts: function () {
-        return axios.get("/products").then(function (response) {
-            return response.data;
-        });
+        return axiosInstance.get("/products").then(response => response);
     },
 
     AddProduct: function (product) {
-        return axios.post("/products", stringify(product)).then(function (response) {
-            return response.data;
-        });
-
+        return axiosInstance.post("/products", product).then(response => response);
     },
 
     DeleteProduct: function (id) {
-        return axios.delete("/products", stringify(id)).then(function (response) {
-            return response.data;
-        });
+        return axiosInstance.delete("/products/" + id).then(response => response);
     },
 
     UpdateProduct: function (product) {
-        return axios.put("/products", stringify(product)).then(function (response) {
-            return response.data;
-        });
+        return axiosInstance.put("/products", product).then(response => response);
     },
 }

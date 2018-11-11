@@ -3,89 +3,70 @@
   <div>
     <div class="actions">
       <a class="btn btn-default">
-        <router-link :to="{path: '/add-product'}">
+        <router-link :to="{path: '/add'}">
           <span class="glyphicon glyphicon-plus"></span>
           添加商品
         </router-link>
       </a>
     </div>
-    <div class="filters row">
-      <div class="form-group col-sm-3">
-        <label for="search-element">名称</label>
-        <input v-model="searchKey" class="form-control" id="search-element" requred>
-      </div>
-    </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>名称</th>
-          <th>描述</th>
-          <th>价格</th>
-          <th class="col-sm-2">操作</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="product in filteredProducts" :key="product.id">
-          <!-- tr v-for="product in products" -->
-          <!-- tr v-for="product in products | filterBy searchKey in 'name'" -->
-          <td>
-            <a>
-              <router-link
-                :to="{name: 'product', params: {product_id: product.id}}"
-              >{{ product.name }}</router-link>
-            </a>
-          </td>
-          <td>{{ product.description }}</td>
-          <td>
-            {{ product.price }}
-            <span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
-          </td>
-          <td>
-            <a class="btn btn-warning btn-xs">
-              <router-link :to="{name: 'product-edit', params: {product_id: product.id}}">编辑</router-link>
-            </a>
-            <a class="btn btn-danger btn-xs">
-              <router-link :to="{name: 'product-delete', params: {product_id: product.id}}">删除</router-link>
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <el-table
+      :data="products.filter(data => !searchKey || data.name.toLowerCase().includes(searchKey.toLowerCase()))"
+      border=""
+      style="width: 100%"
+    >
+      <el-table-column prop="name" label="名称"></el-table-column>
+      <el-table-column prop="description" label="描述"></el-table-column>
+      <el-table-column prop="price" label="价格"></el-table-column>
+      <el-table-column align="right">
+        <template slot="header" slot-scope="slot">
+          <el-input v-model="searchKey" size="mini" placeholder="搜索..."/>
+        </template>
+        <template slot-scope="scope">
+          <el-button size="mini" @click="showProduct(scope.$index, scope.row)">编辑</el-button>
+          <el-button size="mini" type="danger" @click="deleteProduct(scope.$index, scope.row)">删除</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 
 <script>
-import {WebAppAPI} from '@/API.js'
+import { WebAppAPI } from '@/API.js';
 export default {
   name: 'ProductList',
   template: '#product-list',
-  data(){
+  data() {
     return {
       products: [],
       searchKey: '',
     };
   },
   methods: {
-    loadAllProducts(){
-      WebAppAPI.GetAllProducts().then((res) =>{
-        this.products = res;
+    loadAllProducts() {
+      WebAppAPI.GetAllProducts().then(response => {
+        this.products = response.data;
       });
     },
+    deleteProduct(index, row) {
+      if (confirm('是否删除 ' + row.name)) {
+        WebAppAPI.DeleteProduct(row.id).then(response => {
+          if (response.status === 200 || response.status === 204) {
+            this.products = this.products.filter(p => {
+              return p.id != row.id;
+            });
+          }
+        });
+      }
+    },
+    showProduct(index, row) {
+      this.$router.push('edit/' + row.id);
+    },
   },
-  ready(){
-
-  },
-  created(){
+  ready() {},
+  created() {
     this.loadAllProducts();
   },
-  mounted(){
-  },
-  computed: {
-    filteredProducts() {
-      return this.products.filter(product => {
-        return product.name.indexOf(this.searchKey) > -1;
-      });
-    },
-  },
+  mounted() {},
+  computed: {},
 };
 </script>
