@@ -16,7 +16,7 @@ rails s
 
 ```
 
-···
+```
 cd vuejs-with-rails-api-example/front-end
 
 npm install
