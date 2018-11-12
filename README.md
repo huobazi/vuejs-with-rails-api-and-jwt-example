@@ -10,7 +10,7 @@ cd vuejs-with-rails-api-example/back-end
 
 bundle
 
-rake db:migrate
+rails db:migrate
 
 rails s
 ```
