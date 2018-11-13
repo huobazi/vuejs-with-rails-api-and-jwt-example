@@ -4,6 +4,7 @@
     <el-main>
       <ProductForm action="add"/>
     </el-main>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -16,7 +17,8 @@ export default {
   name: 'Add',
   template: '#add',
   components: {
-    ProductForm, Header,
+    ProductForm, 
+    Header,
     Footer,
   },
 };
