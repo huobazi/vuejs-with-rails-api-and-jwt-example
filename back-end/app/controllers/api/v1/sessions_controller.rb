@@ -1,26 +1,25 @@
 module Api
   module V1
     class SessionsController < ApplicationController
-      before_action :authenticate_request!
+      skip_before_action :authenticate_request!, only: [:create]
 
       # POST /login
       def create
         user = User.find_by(username: user_params[:username])
-
-        if user.authenticate?(params[:password])
-          render json: payload(user)
+        if user && user.authenticate(params[:password])
+          render json: json_to_render(user), status: :created
         else
-          render json: {message: ["用户名或密码错误"]}, status: :unauthorized
+          render json: {message: ["用户名或密码错误"]}
         end
       end
 
       private
 
-      def payload(user)
+      def json_to_render(user)
         return nil unless user and user.id
         {
-          auth_token: JsonWebToken.encode({user_id: user.id, exp: (Time.now + 1.hours).to_i}),
-          user: {id: user.id, email: user.email},
+          auth_token: JsonWebToken.encode({user_id: user.id}),
+          user: {id: user.id, username: user.username},
         }
       end
 

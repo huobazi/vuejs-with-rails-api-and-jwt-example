@@ -1,7 +1,7 @@
 module Api
   module V1
     class UsersController < ApplicationController
-      before_action :authenticate_request!
+      skip_before_action :authenticate_request!, only: [:create]
 
       # POST /register
       def create
@@ -10,14 +10,14 @@ module Api
           response = {message: "User created successfully"}
           render json: response, status: :created
         else
-          render json: @user.errors, status: :bad
+          render json: @user.errors
         end
       end
 
       private
 
       def user_params
-        params.permit(:username, :password)
+        params.require(:user).permit(:username, :password, :password_confirmation)
       end
     end
   end

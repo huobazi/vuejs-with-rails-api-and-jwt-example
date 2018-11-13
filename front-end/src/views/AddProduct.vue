@@ -36,7 +36,7 @@ export default {
       productRules: {
         name: [
           { required: true, message: '请输入名称', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' },
+          { min: 3, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur' },
         ],
         price: [{ required: true, message: '请选择价格', trigger: 'change' }],
         description: [
@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     createProduct() {
-      WebAppAPI.AddProduct(this.product).then(response => {
+      WebAppAPI.CreateProduct(this.product).then(response => {
         if (response.status === 201) {
           this.$router.push('/');
         } else if (response.status === '422') {
@@ -56,9 +56,9 @@ export default {
             errorMessage += '\r\n;';
             errorMessage += element;
           });
-          alert(errorMessage);
+          $alert(errorMessage, '提示');
         } else {
-          alert('未知错误！');
+          $alert('未知错误！', '提示');
         }
       });
     },
@@ -67,7 +67,6 @@ export default {
         if (valid) {
           this.createProduct();
         } else {
-          console.log('error submit!!');
           return false;
         }
       });

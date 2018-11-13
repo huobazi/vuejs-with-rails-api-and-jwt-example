@@ -5,8 +5,6 @@ module Api
 
       before_action :authenticate_request!
 
-      attr_reader :current_user
-
       def current_user
         @current_user
       end
@@ -18,27 +16,28 @@ module Api
       protected
 
       def authenticate_request!
+        if !http_token
+          raise AuthenticationError, "Not Authenticated: Require X-Authorization-Token"
+        end
         unless user_id_in_token?
-          raise AuthenticationError, "Not Authenticated"
-          return
+          raise AuthenticationError, "Not Authenticated: Bad tok format"
         end
         @current_user = User.find(auth_token[:user_id])
       rescue JWT::VerificationError
-        raise InvalidToken, "Not Authenticated"
+        raise InvalidToken, "Not Authenticated: InvalidToken, Bad tok format"
       rescue JWT::DecodeError
-        raise DecodeError, "Not Authenticated"
+        raise DecodeError, "Not Authenticated: DecodeError, Bad tok format"
       end
 
       private
 
       def http_token
-        @http_token ||= if request.headers["Authorization"].present?
-                          request.headers["Authorization"].split(" ").last
-                        end
+        return request.headers["X-Authorization-Token"].split(" ").last if request.headers["X-Authorization-Token"].present?
+        nil
       end
 
       def auth_token
-        @auth_token ||= JsonWebToken.decode(http_token)
+        JsonWebToken.decode(http_token)
       end
 
       def user_id_in_token?

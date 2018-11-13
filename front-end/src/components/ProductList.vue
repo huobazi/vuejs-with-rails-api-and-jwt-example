@@ -22,8 +22,8 @@
           <el-input v-model="searchKey" size="mini" placeholder="搜索..."/>
         </template>
         <template slot-scope="scope">
-          <el-button size="mini" @click="showProduct(scope.$index, scope.row)">编辑</el-button>
-          <el-button size="mini" type="danger" @click="deleteProduct(scope.$index, scope.row)">删除</el-button>
+          <el-button type="primary" icon="el-icon-edit" circle @click="showProduct(scope.$index, scope.row)"></el-button>
+          <el-button type="danger" icon="el-icon-delete" circle @click="deleteProduct(scope.$index, scope.row)"></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -48,15 +48,25 @@ export default {
       });
     },
     deleteProduct(index, row) {
-      if (confirm('是否删除 ' + row.name)) {
-        WebAppAPI.DeleteProduct(row.id).then(response => {
-          if (response.status === 200 || response.status === 204) {
-            this.products = this.products.filter(p => {
-              return p.id != row.id;
-            });
-          }
-        });
-      }
+      this.$confirm('此操作将永久删除 ' + row.name + ' , 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      })
+        .then(() => {
+          WebAppAPI.DeleteProduct(row.id).then(response => {
+            if (response.status === 200 || response.status === 204) {
+              this.$message({
+                type: 'success',
+                message: '删除成功!',
+              });
+              this.products = this.products.filter(p => {
+                return p.id != row.id;
+              });
+            }
+          });
+        })
+        .catch(() => {});
     },
     showProduct(index, row) {
       this.$router.push('edit/' + row.id);
