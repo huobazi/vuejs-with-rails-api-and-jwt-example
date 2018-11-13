@@ -4,6 +4,7 @@
     <el-main>
       <ProductForm action="edit" v-bind:productId="this.$route.params.id"/>
     </el-main>
+    <Footer></Footer>
   </div>
 </template>
 
