@@ -1,37 +1,47 @@
 <template id="register">
   <div class="register">
-    <el-form :model="user" :rules="userRules" ref="userForm" label-width="80px">
-      <el-form-item label="用户名" prop="username">
-        <el-input placeholder="请输入用户名" v-model="user.username" required clearable></el-input>
-      </el-form-item>
-      <el-form-item label="密码" prop="password">
-        <el-input placeholder="请输入密码" v-model="user.password" type="password" required clearable></el-input>
-      </el-form-item>
-      <el-form-item label="确认密码" prop="password_confirmation">
-        <el-input
-          placeholder="请输入确认密码"
-          v-model="user.password_confirmation"
-          type="password"
-          required
-          clearable
-        ></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm('userForm')">注册</el-button>&nbsp;&nbsp;
-        <el-button @click="resetForm('userForm')">重置</el-button>&nbsp;&nbsp;
-        <router-link to="/login">已有账户？去登陆</router-link>
-      </el-form-item>
-    </el-form>
+    <Header></Header>
+    <el-main>
+      <el-form :model="user" :rules="userRules" ref="userForm" label-width="80px">
+        <el-form-item label="用户名" prop="username">
+          <el-input placeholder="请输入用户名" v-model="user.username" required clearable></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+          <el-input placeholder="请输入密码" v-model="user.password" type="password" required clearable></el-input>
+        </el-form-item>
+        <el-form-item label="确认密码" prop="password_confirmation">
+          <el-input
+            placeholder="请输入确认密码"
+            v-model="user.password_confirmation"
+            type="password"
+            required
+            clearable
+          ></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('userForm')">注册</el-button>&nbsp;&nbsp;
+          <el-button @click="resetForm('userForm')">重置</el-button>&nbsp;&nbsp;
+          <router-link to="/login">已有账户？去登陆</router-link>
+        </el-form-item>
+      </el-form>
+    </el-main>
+    <Footer></Footer>
   </div>
 </template>
 
 
 <script>
 import { WebAppAPI } from '@/API.js';
+import Header from '@/components/Header.vue';
+import Footer from '@/components/Footer.vue';
 
 export default {
   name: 'register',
   template: '#register',
+  components: {
+    Header,
+    Footer,
+  },
   data() {
     var validateConfirmPassword = (rule, value, callback) => {
       if (value === '') {

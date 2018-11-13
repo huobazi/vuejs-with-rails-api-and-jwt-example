@@ -6,7 +6,9 @@ import { WebAppAPI } from '@/API.js';
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import Home from '@/views/Home.vue'
-import AddProduct from '@/views/AddProduct.vue'
+import About from '@/views/About.vue'
+import Add from '@/views/Add.vue'
+import Edit from '@/views/Edit.vue'
 
 Vue.use(Router)
 
@@ -28,9 +30,19 @@ const router = new Router({
       component: Home
     },
     {
+      path: '/about',
+      name: 'about',
+      component: About
+    },
+    {
       path: '/add',
-      name: 'add-product',
-      component: AddProduct
+      name: 'add',
+      component: Add
+    },
+    {
+      path: '/edit/:id',
+      name: 'edit',
+      component: Edit
     },
   ]
 });

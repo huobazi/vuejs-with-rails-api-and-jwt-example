@@ -1,68 +1,51 @@
 <template>
-  <div id="app">
-    <el-container>
-      <el-header>
-        <el-menu
-          :default-active="headerMenuActiveIndex"
-          class="el-menu-demo"
-          mode="horizontal"
-          @select="handleSelectMenu"
-          background-color="#545c64"
-          text-color="#fff"
-          active-text-color="#ffd04b"
-        >
-          <el-menu-item index="0">首页</el-menu-item>
-          <el-menu-item index="1">添加</el-menu-item>
-          <el-menu-item index="2">退出</el-menu-item>
-        </el-menu>
-      </el-header>
-      <el-main>
+  <el-row id="app">
+    <el-col :span="24">
+      <div class="grid-content bg-purple-dark">
         <router-view></router-view>
-      </el-main>
-    </el-container>
-  </div>
+      </div>
+    </el-col>
+  </el-row>
 </template>
 
 
 <script>
 export default {
   name: 'app',
-  data() {
-    return {
-      headerMenuActiveIndex: '0',
-    };
-  },
-  methods: {
-    handleSelectMenu(key, keyPath) {
-      console.log(key, keyPath);
-      switch (key) {
-        case '0':
-          this.$router.push('/');
-          break;
-        case '1':
-          this.$router.push('/add');
-          break;
-        case '2':
-          console.log('try do logout');
-          break;
-        default:
-          break;
-      }
-    },
-  },
-  created: function() {
-    console.log('app created');
-  },
-  mounted: function() {
-    console.log('app mounted');
-    console.log('this.$route', this.$route);
-  },
-  destroyed: function() {
-    console.log('app destroyed');
-  },
+  created: function() {},
+  mounted: function() {},
+  destroyed: function() {},
+  components: {},
 };
 </script>
 <style>
+.el-row {
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.el-col {
+  border-radius: 4px;
+}
+.bg-purple-dark {
+  background: #99a9bf;
+}
+.bg-purple {
+  background: #d3dce6;
+}
+.bg-purple-light {
+  background: #e5e9f2;
+}
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+.row-bg {
+  padding: 10px 0;
+  background-color: #f9fafc;
+}
+
 .el-header,
 .el-footer {
   background-color: #b3c0d1;
