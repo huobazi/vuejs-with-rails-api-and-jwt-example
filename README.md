@@ -1,8 +1,7 @@
-## rails-api 做后端 API, vuejs 做前端，前后端分离示例
+## rails-api 做后端, vuejs 做前端，JWT 做验证，前后端分离示例
 
 ```
 git clone git@github.com:huobazi/vuejs-with-rails-api-example.git
-
 ```
 
 ```
@@ -22,8 +21,3 @@ npm install
 
 npm run serve
 ```
-
-
-## TODO
-
-JWT auth
