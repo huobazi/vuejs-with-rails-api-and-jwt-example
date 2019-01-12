@@ -6,9 +6,9 @@ class JsonWebToken
       ENV["JWT_AUTH_SECRET"] || Rails.application.credentials.secret_key_base
     end
 
-    def encode(playod, exp = 1.hours.from_now)
-      playod[:exp] = exp.to_i
-      JWT.encode(playod, token_secret, ALGORITHM)
+    def encode(paylod, exp = 1.hours.from_now)
+      paylod[:exp] = exp.to_i
+      JWT.encode(paylod, token_secret, ALGORITHM)
     end
 
     def decode(token)
