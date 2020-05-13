@@ -1,9 +1,15 @@
-## rails-api 做后端, vuejs 做前端, JWT 做验证, 前后端分离示例.
+# 前后端分离示例
 
+- vuejs 做前端
+- rails-api 做后端
+- JWT 做验证
+
+##  clone the repo
 ```
 git clone https://github.com/huobazi/vuejs-with-rails-api-and-jwt-example.git
 ```
 
+## run the backend
 ```
 cd vuejs-with-rails-api-example/back-end
 
@@ -14,6 +20,7 @@ rails db:migrate
 rails s
 ```
 
+## run the frotend
 ```
 cd vuejs-with-rails-api-example/front-end
 
