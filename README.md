@@ -17,7 +17,7 @@ bundle
 
 rails db:migrate
 
-rails s
+bundle exec rails s
 ```
 
 ## run the frotend
