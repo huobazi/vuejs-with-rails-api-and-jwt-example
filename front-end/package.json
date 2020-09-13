@@ -9,26 +9,26 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "element-ui": "^2.4.9",
+    "element-ui": "^2.13.2",
     "qs": "^6.5.2",
-    "vue": "^2.5.17",
-    "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vue": "^2.6.12",
+    "vue-router": "^3.4.3",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-eslint": "^3.1.1",
-    "@vue/cli-service": "^3.1.1",
+    "@vue/cli-plugin-eslint": "^3.12.1",
+    "@vue/cli-service": "^3.12.1",
     "babel-cli": "^6.26.0",
-    "babel-eslint": "^10.0.1",
+    "babel-eslint": "^10.1.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "css-loader": "^1.0.1",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0-0",
-    "node-sass": "^4.10.0",
-    "sass-loader": "^7.1.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.2.3",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^7.3.1",
     "style-loader": "^0.23.1",
-    "vue-template-compiler": "^2.5.17",
-    "webpack": "^4.25.1"
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^4.44.1"
   }
 }

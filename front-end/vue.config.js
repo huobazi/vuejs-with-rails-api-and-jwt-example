@@ -11,8 +11,8 @@ module.exports = {
     // https://www.example.com/project/v1.1/index.html
     // baseUrl becomes /project/v1.1/
   
-    baseUrl: '/',
-  
+    //baseUrl: '/',
+    publicPath: '/',
    // baseUrl: process.env.NODE_ENV === 'production' ? '/your/dir/' : '/'
   
     // where to output built files

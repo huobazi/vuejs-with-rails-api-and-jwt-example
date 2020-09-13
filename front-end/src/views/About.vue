@@ -12,7 +12,7 @@
         <span>@huobazi</span>
         <div>
           <div class="text item" style="text-align:center;padding:30px;">
-            <a style="padding:10px;" href="https://huobazi.aspxboy.com/">Blog</a>
+            <a style="padding:10px;" href="https://huobazi.github.com/">Blog</a>
             <a style="padding:10px;" href="https://github.com/huobazi">github</a>
             <a style="padding:10px;" href="https://twitter.com/huobazi">twitter</a>
           </div>
