@@ -15,7 +15,7 @@ cd vuejs-with-rails-api-example/back-end
 
 bundle
 
-rails db:migrate
+bundle exec rails db:migrate
 
 bundle exec rails s
 ```
